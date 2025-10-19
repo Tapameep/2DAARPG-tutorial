@@ -4,6 +4,8 @@ const PLAYER = preload("res://Player/player.tscn") # reference to the player sce
 
 const INVENTORY_DATA : InventoryData = preload("res://GUI/pause_menu/inventory/player_inventory.tres")
 
+signal interact_pressed
+
 var player : Player
 var player_spawned : bool = false
 

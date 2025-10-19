@@ -13,9 +13,6 @@ var attacking : bool = false
 @onready var hurt_box: HurtBox = %AttackHurtBox
 
 
-
-
-
 # What happens when the player enters this state
 func Enter() -> void: 
 	player.update_animation("attack")
@@ -29,8 +26,8 @@ func Enter() -> void:
 	attacking = true
 	
 	await get_tree().create_timer( 0.075).timeout # delayi
-	hurt_box.monitoring = true
-	
+	if attacking:
+		hurt_box.monitoring = true
 	pass
 	
 # What happens when the player exits this State

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dw5oybrh310um"]
+[gd_scene load_steps=38 format=3 uid="uid://dw5oybrh310um"]
 
 [ext_resource type="Script" uid="uid://dg4plvgf551o6" path="res://Enemies/Scripts/enemy.gd" id="1_t8cwk"]
 [ext_resource type="Texture2D" uid="uid://dchvjtlpugtbg" path="res://Player/Sprites/Shadow.png" id="1_wwfkb"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://cx4naqq1lvqn8" path="res://Enemies/Scripts/States/enemy_state_stun.gd" id="9_pydiu"]
 [ext_resource type="Texture2D" uid="uid://b7kw6ccsyxtic" path="res://Enemies/Slime/DestroySmoke.png" id="10_pydiu"]
 [ext_resource type="Script" uid="uid://c3lwfaia53l4f" path="res://Enemies/Scripts/States/enemy_state_destroyed.gd" id="11_843tw"]
+[ext_resource type="Resource" uid="uid://d1vyo1ew1y7od" path="res://Items/gem.tres" id="12_nsi17"]
+[ext_resource type="Script" uid="uid://de3oh7jjimedh" path="res://Enemies/Scripts/drop_data.gd" id="13_vjyi2"]
+[ext_resource type="Resource" uid="uid://qr7v1w5w0ipm" path="res://Items/apple.tres" id="14_vjyi2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oij8y"]
 radius = 5.0
@@ -659,6 +662,18 @@ _data = {
 &"walk_up": SubResource("Animation_jlwhn")
 }
 
+[sub_resource type="Resource" id="Resource_nsi17"]
+script = ExtResource("13_vjyi2")
+item = ExtResource("12_nsi17")
+max_amount = 4
+metadata/_custom_type_script = "uid://de3oh7jjimedh"
+
+[sub_resource type="Resource" id="Resource_yynal"]
+script = ExtResource("13_vjyi2")
+item = ExtResource("14_vjyi2")
+probability = 35.0
+metadata/_custom_type_script = "uid://de3oh7jjimedh"
+
 [sub_resource type="Animation" id="Animation_nsi17"]
 length = 0.001
 tracks/0/type = "value"
@@ -771,6 +786,7 @@ next_state = NodePath("../Idle")
 
 [node name="Destroy" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("11_843tw")
+drops = Array[Resource]([SubResource("Resource_nsi17"), SubResource("Resource_yynal")])
 
 [node name="HurtBox" parent="." instance=ExtResource("7_jlwhn")]
 
