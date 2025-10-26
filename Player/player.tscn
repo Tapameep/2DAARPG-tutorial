@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c0h60p7tl8gec"]
+[gd_scene load_steps=49 format=3 uid="uid://c0h60p7tl8gec"]
 
 [ext_resource type="Script" uid="uid://dvuhpllltu1pi" path="res://Player/Scripts/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://fhklo6ot6tsg" path="res://Player/Sprites/PlayerSprite02.png" id="2_k53q1"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://cdimpypw3fb6y" path="res://Player/Scripts/state_stun.gd" id="11_dkpta"]
 [ext_resource type="PackedScene" uid="uid://b2y7tqheqgj4f" path="res://GeneralNodes/HitBox/hit_box.tscn" id="13_p5o4e"]
 [ext_resource type="AudioStream" uid="uid://5ssq6airan4v" path="res://Player/Audio/hit_player.wav" id="14_gu6f8"]
+[ext_resource type="Script" uid="uid://d1sykoihgy6qv" path="res://Player/Scripts/push_area.gd" id="14_lfmf2"]
+[ext_resource type="Script" uid="uid://cg4ti4xoi1mfm" path="res://Player/Scripts/abilities/abilities.gd" id="17_pisgm"]
+[ext_resource type="PackedScene" uid="uid://evytusdoglvv" path="res://GeneralNodes/ItemMagnet/item_magnet.tscn" id="18_b1ygp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_edjgo"]
 
@@ -533,6 +536,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dkpta"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pisgm"]
+size = Vector2(20, 16)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_gu6f8"]
 
 [sub_resource type="Animation" id="Animation_7emwf"]
@@ -603,8 +609,10 @@ _data = {
 &"default": SubResource("Animation_n471f")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o28un"]
+radius = 56.0803
+
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(-1, -1)
 collision_mask = 16
 motion_mode = 1
 wall_min_slide_angle = 0.174533
@@ -679,7 +687,7 @@ script = ExtResource("11_5htga")
 [node name="Audio" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio"]
-max_polyphony = 4
+max_polyphony = 6
 
 [node name="Interactions" type="Node2D" parent="."]
 script = ExtResource("10_apopc")
@@ -694,6 +702,17 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_dkpta")
 debug_color = Color(0.22745098, 0.7607843, 0.28627452, 0.6117647)
 
+[node name="PushArea" type="Area2D" parent="Interactions"]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("14_lfmf2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/PushArea"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_pisgm")
+debug_color = Color(0.984019, 0.40173694, 0.6715783, 0.6117647)
+
 [node name="HitBox" parent="." instance=ExtResource("13_p5o4e")]
 collision_layer = 2
 
@@ -706,3 +725,13 @@ debug_color = Color(0.831373, 0.709804, 0.0980392, 0.643137)
 libraries = {
 &"": SubResource("AnimationLibrary_gpjlu")
 }
+
+[node name="Abilities" type="Node" parent="."]
+script = ExtResource("17_pisgm")
+
+[node name="ItemMagnet" parent="." instance=ExtResource("18_b1ygp")]
+position = Vector2(0, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemMagnet"]
+shape = SubResource("CircleShape2D_o28un")
+debug_color = Color(0.6, 0.5176471, 0.47058824, 0.20392157)
