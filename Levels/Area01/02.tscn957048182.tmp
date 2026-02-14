@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bbbpb0gun7i6r"]
+[gd_scene load_steps=15 format=4 uid="uid://bbbpb0gun7i6r"]
 
 [ext_resource type="Script" uid="uid://c04jwutbmrda3" path="res://Levels/Scripts/level.gd" id="1_x70af"]
 [ext_resource type="PackedScene" uid="uid://boa0jsd7cvlat" path="res://Tile Maps/grass_01.tscn" id="2_tek06"]
@@ -13,7 +13,6 @@
 [ext_resource type="Resource" uid="uid://juffhyaafsb1" path="res://npc/00_npcs/npc_01.tres" id="10_krbdk"]
 [ext_resource type="Script" uid="uid://h6204p87s013" path="res://Interactables/dialog/scripts/dialog_text.gd" id="11_mxs1d"]
 [ext_resource type="PackedScene" uid="uid://blvyoyloljf4g" path="res://npc/npc_behaviour_patrol.tscn" id="11_sci0f"]
-[ext_resource type="Resource" uid="uid://c1w24pym3v8jq" path="res://npc/00_npcs/00_hero.tres" id="12_mxs1d"]
 [ext_resource type="PackedScene" uid="uid://diuhsbtlexk5c" path="res://npc/patrol_location.tscn" id="12_r3wde"]
 
 [node name="02" type="Node2D"]
@@ -53,24 +52,19 @@ npc_resource = ExtResource("10_krbdk")
 
 [node name="NpcWanderBehaviour" parent="Npc" instance=ExtResource("8_ua1y0")]
 
-[node name="DialogInteraction" parent="Npc" instance=ExtResource("10_isjcn")]
+[node name="DialogInteraction" parent="Npc/NpcWanderBehaviour" instance=ExtResource("10_isjcn")]
+enabled = true
 
-[node name="DialogText" type="Node" parent="Npc/DialogInteraction"]
+[node name="DialogText" type="Node" parent="Npc/NpcWanderBehaviour/DialogInteraction"]
 script = ExtResource("11_mxs1d")
-text = "Placeholder text 1"
-npc_info = ExtResource("10_krbdk")
 metadata/_custom_type_script = "uid://h6204p87s013"
 
-[node name="DialogText2" type="Node" parent="Npc/DialogInteraction"]
+[node name="DialogText2" type="Node" parent="Npc/NpcWanderBehaviour/DialogInteraction"]
 script = ExtResource("11_mxs1d")
-text = "Placeholder text 2"
-npc_info = ExtResource("12_mxs1d")
 metadata/_custom_type_script = "uid://h6204p87s013"
 
-[node name="DialogText3" type="Node" parent="Npc/DialogInteraction"]
+[node name="DialogText3" type="Node" parent="Npc/NpcWanderBehaviour/DialogInteraction"]
 script = ExtResource("11_mxs1d")
-text = "Placeholder text 3"
-npc_info = ExtResource("10_krbdk")
 metadata/_custom_type_script = "uid://h6204p87s013"
 
 [node name="Npc2" parent="." instance=ExtResource("7_icgqb")]
