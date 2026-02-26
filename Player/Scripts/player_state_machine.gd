@@ -3,6 +3,7 @@ class_name PlayerStateMachine extends Node
 var states : Array[State]
 var prev_state : State
 var current_state : State 
+var next_state : State
 
 func _ready():
 	# disable code before everything is fully initialised
@@ -46,9 +47,11 @@ func ChangeState ( new_state: State) -> void:
 	if new_state == null || new_state == current_state:
 		return
 	
+	next_state = new_state
+	
 	if current_state: 
 		current_state.Exit()
-		
+	
 	prev_state = current_state
 	current_state = new_state
 	current_state.Enter()

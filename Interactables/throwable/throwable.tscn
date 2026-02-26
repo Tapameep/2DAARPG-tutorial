@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cli4h2263dcu6"]
+
+[ext_resource type="Script" uid="uid://djg78m5201kfq" path="res://Interactables/throwable/throwable.gd" id="1_7p4g0"]
+[ext_resource type="Script" uid="uid://chtgk3tvpompo" path="res://GeneralNodes/HurtBox/hurt_box.gd" id="2_jakst"]
+
+[node name="Throwable" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_7p4g0")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+monitorable = false
+script = ExtResource("2_jakst")
+metadata/_custom_type_script = "uid://chtgk3tvpompo"

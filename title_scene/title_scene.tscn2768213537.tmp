@@ -1,0 +1,129 @@
+[gd_scene load_steps=12 format=4 uid="uid://f6g4n4q8fimb"]
+
+[ext_resource type="Script" uid="uid://p0vs0xcaoj05" path="res://title_scene/title_scene.gd" id="1_5xqkb"]
+[ext_resource type="PackedScene" uid="uid://dcvx5wf0iyknv" path="res://Tile Maps/dungeon_01.tscn" id="1_bl0uk"]
+[ext_resource type="AudioStream" uid="uid://dejtsxoupo6oh" path="res://title_scene/audio/waves.mp3" id="2_1a1kh"]
+[ext_resource type="Texture2D" uid="uid://hs0bakfpwydd" path="res://title_scene/sprite/title.png" id="2_uvhto"]
+[ext_resource type="AudioStream" uid="uid://b0ncfhurahfuc" path="res://title_scene/audio/menu_focus.wav" id="3_wgj1g"]
+[ext_resource type="PackedScene" uid="uid://dff074i0c6uja" path="res://Levels/player_spawn.tscn" id="4_i4gmv"]
+[ext_resource type="AudioStream" uid="uid://dygopupnwfw5" path="res://title_scene/audio/menu_select.wav" id="4_lj5tl"]
+[ext_resource type="PackedScene" uid="uid://c6nqdmf1w1dev" path="res://title_scene/splash_scene.tscn" id="7_wgj1g"]
+
+[sub_resource type="Animation" id="Animation_5xqkb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i4gmv"]
+resource_name = "default"
+length = 5.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.15, 0.22500001, 0.3, 0.375, 0.45000002, 0.525),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0q24l"]
+_data = {
+&"RESET": SubResource("Animation_5xqkb"),
+&"default": SubResource("Animation_i4gmv")
+}
+
+[node name="TitleScene" type="Node2D"]
+script = ExtResource("1_5xqkb")
+music = ExtResource("2_1a1kh")
+button_focus_audio = ExtResource("3_wgj1g")
+button_pressed_audio = ExtResource("4_lj5tl")
+
+[node name="Dungeon_01_TileMap" parent="." instance=ExtResource("1_bl0uk")]
+z_index = -1
+tile_map_data = PackedByteArray("AAAAAAAAAAAKAAAAAAAAAAEAAAABAAMAAAAAAAIAAAABAAMAAAAAAAMAAAABAAMAAAAPAP//AAAIAAYAAAAOAP//AAAIAAYAAAANAP//AAAIAAYAAAAMAP//AAAIAAYAAAALAP//AAAIAAYAAAAKAP//AAAIAAYAAAAJAP//AAAIAAYAAAAIAP//AAAIAAYAAAAHAP//AAAIAAYAAAAGAP//AAAIAAYAAAAFAP//AAAIAAYAAAAEAP//AAAIAAYAAAADAP//AAAIAAYAAAACAP//AAAIAAYAAAABAP//AAAIAAYAAAAAAP//AAAIAAYAAAD/////AAAIAAYAAAD//wAAAAAKAAAAAAD//wEAAAABAAMAAAD//wIAAAABAAMAAAD//wMAAAABAAMAAAAAAAQAAAABAAMAAAD//wQAAAABAAMAAAD//wUAAAABAAMAAAD//wYAAAABAAMAAAD//wcAAAALAAYAAAD//wgAAAAIAAYAAAAAAAgAAAAIAAYAAAABAAgAAAAIAAYAAAACAAgAAAAIAAYAAAADAAgAAAAIAAYAAAAEAAgAAAAIAAYAAAAFAAgAAAAIAAYAAAAGAAgAAAAIAAYAAAAHAAgAAAAIAAYAAAAIAAgAAAAIAAYAAAAJAAgAAAAIAAYAAAAKAAgAAAAIAAYAAAALAAgAAAAIAAYAAAAMAAgAAAAIAAYAAAANAAgAAAAIAAYAAAAOAAgAAAAIAAYAAAAPAAgAAAAIAAYAAAAPAAcAAAALAAYAAAAPAAYAAAABAAMAAAAPAAUAAAABAAMAAAAPAAQAAAABAAMAAAAPAAMAAAABAAMAAAAPAAIAAAABAAMAAAAPAAEAAAABAAMAAAAPAAAAAAAKAAAAAAAOAAAAAAAKAAAAAAAOAAEAAAABAAMAAAAOAAIAAAABAAMAAAAOAAMAAAABAAMAAAAOAAQAAAABAAMAAAAOAAUAAAABAAMAAAAOAAYAAAABAAMAAAANAAYAAAABAAMAAAAMAAYAAAABAAMAAAALAAYAAAABAAMAAAALAAcAAAALAAYAAAAKAAcAAAALAAYAAAAJAAcAAAALAAYAAAAIAAcAAAALAAYAAAAHAAcAAAALAAYAAAAGAAcAAAALAAYAAAAFAAcAAAALAAYAAAAEAAcAAAALAAYAAAAMAAcAAAALAAYAAAANAAcAAAALAAYAAAAOAAcAAAALAAYAAAAAAAUAAAABAAMAAAAAAAYAAAABAAMAAAAAAAcAAAALAAYAAAABAAIAAAABAAMAAAABAAMAAAABAAMAAAABAAQAAAABAAMAAAABAAUAAAABAAMAAAABAAYAAAABAAMAAAABAAcAAAALAAYAAAACAAIAAAABAAMAAAACAAMAAAABAAMAAAACAAQAAAABAAMAAAACAAUAAAABAAMAAAACAAYAAAABAAMAAAACAAcAAAALAAYAAAADAAAAAAAKAAAAAAADAAEAAAABAAMAAAADAAIAAAABAAMAAAADAAMAAAABAAMAAAADAAQAAAABAAMAAAADAAUAAAABAAMAAAADAAYAAAABAAMAAAADAAcAAAALAAYAAAAEAAAAAAAKAAAAAAAEAAEAAAABAAMAAAAEAAIAAAABAAMAAAAEAAMAAAABAAMAAAAEAAQAAAABAAMAAAAEAAUAAAABAAMAAAAEAAYAAAABAAMAAAAFAAAAAAAKAAAAAAAFAAEAAAABAAMAAAAFAAIAAAABAAMAAAAFAAMAAAABAAMAAAAFAAQAAAABAAMAAAAFAAUAAAABAAMAAAAFAAYAAAABAAMAAAAGAAAAAAAKAAAAAAAGAAEAAAABAAMAAAAGAAIAAAABAAMAAAAGAAMAAAABAAMAAAAGAAQAAAABAAMAAAAGAAUAAAABAAMAAAAGAAYAAAABAAMAAAAHAAAAAAAKAAAAAAAHAAEAAAABAAMAAAAHAAIAAAABAAMAAAAHAAMAAAABAAMAAAAHAAQAAAABAAMAAAAHAAUAAAABAAMAAAAHAAYAAAABAAMAAAAIAAAAAAAKAAAAAAAIAAEAAAABAAMAAAAIAAIAAAABAAMAAAAIAAMAAAABAAMAAAAIAAQAAAABAAMAAAAIAAUAAAABAAMAAAAIAAYAAAABAAMAAAAJAAAAAAAKAAAAAAAJAAEAAAABAAMAAAAJAAIAAAABAAMAAAAJAAMAAAABAAMAAAAJAAQAAAABAAMAAAAJAAUAAAABAAMAAAAJAAYAAAABAAMAAAAKAAAAAAAKAAAAAAAKAAEAAAABAAMAAAAKAAIAAAABAAMAAAAKAAMAAAABAAMAAAAKAAQAAAABAAMAAAAKAAUAAAABAAMAAAAKAAYAAAABAAMAAAALAAAAAAAKAAAAAAALAAEAAAABAAMAAAALAAIAAAABAAMAAAALAAMAAAABAAMAAAALAAQAAAABAAMAAAALAAUAAAABAAMAAAAMAAAAAAAKAAAAAAAMAAEAAAABAAMAAAAMAAIAAAABAAMAAAAMAAMAAAABAAMAAAAMAAQAAAABAAMAAAAMAAUAAAABAAMAAAANAAAAAAAKAAAAAAANAAEAAAABAAMAAAANAAIAAAABAAMAAAANAAMAAAABAAMAAAANAAQAAAABAAMAAAANAAUAAAABAAMAAAACAAAAAAAKAAAAAAACAAEAAAABAAMAAAABAAEAAAABAAMAAAABAAAAAAAKAAAAAAAQAAAAAAAKAAAAAAD+/wAAAAAKAAAAAAD+/wcAAAALAAYAAAAQAAcAAAALAAYAAAAQAAgAAAAIAAYAAAD+/wgAAAAIAAYAAAD+/wEAAAABAAIAAAD+/wIAAAABAAIAAAD+/wMAAAABAAIAAAD+/wQAAAABAAIAAAD+/wUAAAABAAIAAAD+/wYAAAABAAIAAAD+////AAAIAAYAAAAQAP//AAAIAAYAAAA=")
+rendering_quadrant_size = 32
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Control"]
+position = Vector2(232, 104)
+texture = ExtResource("2_uvhto")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_0q24l")
+}
+
+[node name="ButtonNew" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 25.0
+offset_right = 33.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "new game"
+
+[node name="ButtonContinue" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 57.0
+offset_right = 33.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "continue"
+
+[node name="SplashScene" parent="CanvasLayer" instance=ExtResource("7_wgj1g")]
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_i4gmv")]
+position = Vector2(232, 128)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+max_polyphony = 6

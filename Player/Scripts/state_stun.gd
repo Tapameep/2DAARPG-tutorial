@@ -26,8 +26,11 @@ func Enter() -> void:
 	pass
 	
 func init() -> void:
-	player.player_damaged.connect( _player_damaged )
+	if not player.player_damaged.is_connected( _player_damaged ): 
+		player.player_damaged.connect( _player_damaged )
 	pass
+
+
 # What happens when the player exits this State
 func Exit() -> void:
 	next_state = null

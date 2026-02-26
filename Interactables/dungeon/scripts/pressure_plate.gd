@@ -21,13 +21,13 @@ func _ready() -> void:
 	off_rect = sprite.region_rect
 	
 
-func _on_body_entered( b : Node2D ) -> void:
+func _on_body_entered( _b : Node2D ) -> void:
 	bodies += 1
 	check_is_activated()
 	pass
 	
 	
-func _on_body_exited( b : Node2D ) -> void:
+func _on_body_exited( _b : Node2D ) -> void:
 	bodies -= 1
 	check_is_activated()
 	pass

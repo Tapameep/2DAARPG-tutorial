@@ -1,11 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://degvidhfepy37"]
+[gd_scene load_steps=17 format=3 uid="uid://degvidhfepy37"]
 
 [ext_resource type="Script" uid="uid://g6jxqisiysvd" path="res://GUI/dialog_system/dialog_system.gd" id="1_5yhxf"]
 [ext_resource type="Texture2D" uid="uid://bsg3pf2gglerj" path="res://GUI/dialog_system/sprites/text-bubble.png" id="2_qocm2"]
 [ext_resource type="FontFile" uid="uid://b410qr80vtafo" path="res://GUI/fonts/Abaddon Light.ttf" id="3_dwuo2"]
 [ext_resource type="FontFile" uid="uid://cuefjsqp46buy" path="res://GUI/fonts/Abaddon Bold.ttf" id="4_umqd7"]
 [ext_resource type="Texture2D" uid="uid://d3qifcdrwrbo0" path="res://GUI/dialog_system/sprites/portraits/npc_portrait_01.png" id="5_dwuo2"]
+[ext_resource type="AudioStream" uid="uid://dplufl5xdbg0" path="res://GUI/dialog_system/audio/voice_blip.wav" id="6_8tyrm"]
 [ext_resource type="FontFile" uid="uid://be87hv2lhgvfr" path="res://GUI/fonts/m5x7.ttf" id="6_umqd7"]
+[ext_resource type="Script" uid="uid://b5sv2724m3hns" path="res://Interactables/dialog/scripts/dialog_portrait.gd" id="6_vyuf5"]
+[ext_resource type="Theme" uid="uid://wmh44c7jnrgo" path="res://GUI/dialog_system/dialog_choice_theme.tres" id="9_onhof"]
 
 [sub_resource type="Gradient" id="Gradient_8tyrm"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -77,7 +80,7 @@ _data = {
 
 [node name="DialogSystem" type="CanvasLayer"]
 process_mode = 3
-layer = 0
+layer = 3
 script = ExtResource("1_5yhxf")
 
 [node name="DialogUI" type="Control" parent="."]
@@ -126,6 +129,8 @@ text = "Example [b] text [/b] hi
 [shake][color=orange] shakey [/color][/shake]
 "
 scroll_active = false
+visible_characters = 2
+visible_ratio = 0.05882353
 
 [node name="NameLabel" type="Label" parent="DialogUI"]
 layout_mode = 0
@@ -144,10 +149,15 @@ text = "NAME"
 position = Vector2(56, 198)
 texture = ExtResource("5_dwuo2")
 hframes = 4
+script = ExtResource("6_vyuf5")
 
 [node name="Timer" type="Timer" parent="DialogUI"]
+one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogUI"]
+stream = ExtResource("6_8tyrm")
+max_polyphony = 6
+bus = &"SFX"
 
 [node name="DialogProgressIndicator" type="PanelContainer" parent="DialogUI"]
 self_modulate = Color(0.34256843, 0.55112225, 0.46972638, 1)
@@ -169,3 +179,31 @@ vertical_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_onhof")
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.541
+anchor_top = 0.407
+anchor_right = 0.541
+anchor_bottom = 0.407
+offset_left = -101.67999
+offset_top = -65.89
+offset_right = 121.32001
+offset_bottom = 38.11
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_onhof")
+alignment = 1
+
+[node name="Button" type="Button" parent="DialogUI/VBoxContainer"]
+layout_mode = 2
+text = "Choices1"
+
+[node name="Button2" type="Button" parent="DialogUI/VBoxContainer"]
+layout_mode = 2
+text = "Choices1"
+
+[node name="Button3" type="Button" parent="DialogUI/VBoxContainer"]
+layout_mode = 2
+text = "Choices1"
