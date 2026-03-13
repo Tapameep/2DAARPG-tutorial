@@ -4,7 +4,9 @@ class_name State_Stun extends State
 @export var decelerate_speed : float = 10.0
 @export var invulnerable_duration : float = 1.0
 
-@onready var idle: State = $"../Idle"
+@onready var idle : State = $"../Idle"
+@onready var death : State_Death = $"../Death"
+
 
 var hurt_box : HurtBox
 var direction : Vector2
@@ -13,8 +15,7 @@ var next_state : State = null
 
 # What happens when the player enters this state
 func Enter() -> void: 
-	
-	player.animation_player.animation_finished.connect( _animation_finished)
+	player.animation_player.animation_finished.connect( _animation_finished )
 	
 	direction = player.global_position.direction_to (hurt_box.global_position)
 	player.velocity = direction * -knockback_speed
@@ -22,6 +23,8 @@ func Enter() -> void:
 	player.update_animation("stun")	
 	player.make_invulnerable( invulnerable_duration )
 	player.effect_animation_player.play("damaged")
+	
+	PlayerManager.shake_camera( hurt_box.damage )
 	
 	pass
 	
@@ -34,7 +37,7 @@ func init() -> void:
 # What happens when the player exits this State
 func Exit() -> void:
 	next_state = null
-	player.animation_player.animation_finished.connect( _animation_finished)
+	player.animation_player.animation_finished.disconnect( _animation_finished)
 	
 	pass
 	
@@ -51,8 +54,11 @@ func HandleInput( _event : InputEvent) -> State:
 
 func _player_damaged( _hurt_box : HurtBox) -> void:
 	hurt_box = _hurt_box
-	state_machine.ChangeState(self)
+	if state_machine.current_state != death:
+		state_machine.ChangeState(self)
 	pass
 	
 func _animation_finished ( _a: String) -> void:
 	next_state = idle
+	if player.hp <= 0:
+		next_state = death

@@ -1,9 +1,9 @@
 extends Node
 
 const PLAYER = preload("res://Player/player.tscn") # reference to the player scene
-
 const INVENTORY_DATA : InventoryData = preload("res://GUI/pause_menu/inventory/player_inventory.tres")
 
+signal camera_shook( trauma : float )
 signal interact_pressed
 
 var player : Player
@@ -44,3 +44,7 @@ func play_audio( _audio : AudioStream ) -> void:
 func interact() -> void:
 	interact_handled = false
 	interact_pressed.emit()
+
+
+func shake_camera( trauma : float = 1 ) -> void:
+	camera_shook.emit( trauma )

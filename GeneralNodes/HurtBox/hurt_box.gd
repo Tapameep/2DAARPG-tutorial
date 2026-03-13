@@ -10,5 +10,6 @@ func _ready():
 	
 func _area_enetered ( a : Area2D ) -> void:
 	if a is HitBox:
+		did_damage.emit()
 		a.TakeDamage( self )
 	pass

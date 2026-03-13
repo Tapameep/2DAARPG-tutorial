@@ -49,6 +49,13 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed( "test" ):
+		PlayerManager.shake_camera()
+	pass
+
+
 func set_direction() -> bool:
 	if direction == Vector2.ZERO:
 		return false
@@ -76,16 +83,15 @@ func anim_direction() -> String:
 	elif cardinal_direction == Vector2.UP:
 		return "up"
 	else: return "side"
-	
+
+
 func _take_damage( hurt_box : HurtBox) -> void:
 	if invulnerable == true:
 		return
-	update_hp( -hurt_box.damage )
+		
 	if hp > 0:
+		update_hp( -hurt_box.damage )
 		player_damaged.emit( hurt_box ) 
-	else:
-		player_damaged.emit( hurt_box ) 
-		update_hp( 99 )
 	pass
 
 func update_hp( delta : int ):
@@ -110,3 +116,8 @@ func pickup_item( _t : Throwable ) -> void:
 	carry.throwable = _t
 	
 	pass
+
+
+func revive_player() -> void:
+	update_hp( 99 )
+	state_machine.ChangeState( $StateMachine/Idle )
