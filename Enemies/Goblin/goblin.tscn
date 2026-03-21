@@ -754,6 +754,7 @@ drops = Array[ExtResource("13_ys2o2")]([SubResource("Resource_nsi17"), SubResour
 script = ExtResource("16_p257j")
 vision_area = NodePath("../../VisionArea")
 attack_area = NodePath("../../Sprite2D/AttackHurtBox")
+state_aggro_duration = 3.0
 next_state = NodePath("../Idle")
 
 [node name="HurtBox" parent="." instance=ExtResource("15_j3imk")]

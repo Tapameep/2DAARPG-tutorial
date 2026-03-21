@@ -1,6 +1,8 @@
 @tool
 class_name ItemDropper extends Node2D
 
+signal drop_collected
+
 const PICKUP = preload("res://Items/item_pickup/item_pickup.tscn")
 
 @export var item_data : ItemData : set = _set_item_data
@@ -51,3 +53,4 @@ func drop_item() -> void:
 
 func _on_drop_pickup() -> void:
 	has_dropped_data.set_value()
+	drop_collected.emit()

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://edngypt4g3a1"]
+
+[ext_resource type="Script" uid="uid://du5olxl8yp67p" path="res://quests/scripts/quest_reward_item.gd" id="1_tnb7l"]
+[ext_resource type="Resource" uid="uid://d1vyo1ew1y7od" path="res://Items/gem.tres" id="2_38jhq"]
+[ext_resource type="Resource" uid="uid://nyox0i6ws8ea" path="res://Items/potion.tres" id="3_gp4fl"]
+[ext_resource type="Script" uid="uid://erludh4t1gpo" path="res://quests/scripts/quest_resource.gd" id="4_art2s"]
+
+[sub_resource type="Resource" id="Resource_226j5"]
+script = ExtResource("1_tnb7l")
+item = ExtResource("2_38jhq")
+quantity = 100
+metadata/_custom_type_script = "uid://du5olxl8yp67p"
+
+[sub_resource type="Resource" id="Resource_k7l4w"]
+script = ExtResource("1_tnb7l")
+item = ExtResource("3_gp4fl")
+quantity = 5
+metadata/_custom_type_script = "uid://du5olxl8yp67p"
+
+[resource]
+script = ExtResource("4_art2s")
+title = "Recover Lost Magical Flute"
+description = "Recover the lost magical flute"
+steps = Array[String](["Find the cave entrance", "Find the magical flute", "Return magical flute to NPC"])
+reward_xp = 100
+reward_item = Array[ExtResource("1_tnb7l")]([SubResource("Resource_226j5"), SubResource("Resource_k7l4w")])
+metadata/_custom_type_script = "uid://erludh4t1gpo"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dv2e8hshnnbcd"]
+[gd_scene load_steps=12 format=4 uid="uid://dv2e8hshnnbcd"]
 
 [ext_resource type="Script" uid="uid://c04jwutbmrda3" path="res://Levels/Scripts/level.gd" id="1_2la2r"]
 [ext_resource type="AudioStream" uid="uid://y2jaortpsgsn" path="res://Levels/Music/example_music_02.ogg" id="2_uejuh"]
@@ -6,8 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dff074i0c6uja" path="res://Levels/player_spawn.tscn" id="3_swvnj"]
 [ext_resource type="PackedScene" uid="uid://ci3wnblo35j8f" path="res://Levels/LevelTransition.tscn" id="4_ux7ia"]
 [ext_resource type="PackedScene" uid="uid://cdfrbw6ihx2e4" path="res://Interactables/dungeon/pressure_plate.tscn" id="5_swvnj"]
+[ext_resource type="PackedScene" uid="uid://d1cb5blbqqqix" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="6_54q72"]
 [ext_resource type="PackedScene" uid="uid://dfqa6tuqvew2k" path="res://Interactables/dungeon/barred_door.tscn" id="6_m3xjo"]
+[ext_resource type="PackedScene" uid="uid://d2cjrayo1co31" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="6_sha80"]
 [ext_resource type="PackedScene" uid="uid://ppu1k8xgcisn" path="res://Interactables/dungeon/pushable_statue.tscn" id="7_4dhgi"]
+[ext_resource type="Resource" uid="uid://edngypt4g3a1" path="res://quests/recover_lost_flute.tres" id="7_54q72"]
 
 [node name="01" type="Node2D"]
 script = ExtResource("1_2la2r")
@@ -24,9 +27,27 @@ position = Vector2(224, 128)
 [node name="LevelTransition" parent="." instance=ExtResource("4_ux7ia")]
 position = Vector2(224, 200)
 level = "uid://c3nfolprcbu7l"
-target_transition_area = "LevelTransition03"
-center_player = true
+target_transition_area = "LevelTransition3"
 side = 3
+
+[node name="QuestActivatedSwitch" parent="LevelTransition" instance=ExtResource("6_54q72")]
+check_type = 1
+remove_when_activated = true
+free_on_removed = true
+react_to_global_signal = false
+linked_quest = ExtResource("7_54q72")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player has completed step: find the cave entrance"
+
+[node name="QuestAdvanceTrigger" parent="LevelTransition/QuestActivatedSwitch" instance=ExtResource("6_sha80")]
+linked_quest = ExtResource("7_54q72")
+quest_step = 1
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Step: 1 - find the cave entrance
+Complete: false"
 
 [node name="LevelTransition2" parent="." instance=ExtResource("4_ux7ia")]
 position = Vector2(224, 54)
@@ -42,6 +63,9 @@ position = Vector2(192, 56)
 
 [node name="PushableStatue" parent="." instance=ExtResource("7_4dhgi")]
 position = Vector2(256, 130)
+persistent = true
+persistent_location = Vector2(176, 128)
 
+[connection signal="entered_from_here" from="LevelTransition" to="LevelTransition/QuestActivatedSwitch/QuestAdvanceTrigger" method="advance_quest"]
 [connection signal="activated" from="PressurePlate" to="BarredDoor" method="open_door"]
 [connection signal="deactivated" from="PressurePlate" to="BarredDoor" method="close_door"]

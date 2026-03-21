@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://bx35hkw6caggt"]
+[gd_scene load_steps=43 format=4 uid="uid://bx35hkw6caggt"]
 
 [ext_resource type="Script" uid="uid://c04jwutbmrda3" path="res://Levels/Scripts/level.gd" id="1_6xun4"]
 [ext_resource type="PackedScene" uid="uid://dcvx5wf0iyknv" path="res://Tile Maps/dungeon_01.tscn" id="1_o78sa"]
@@ -11,9 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://d0mehru1uyr1b" path="res://Levels/Dungeon01/dark_wizard/energy_beam.tscn" id="8_7wgl6"]
 [ext_resource type="PackedScene" uid="uid://dic5dp8vt0eck" path="res://GeneralNodes/PersistentDataHandler/persistent-data-handler.tscn" id="8_57pam"]
 [ext_resource type="Texture2D" uid="uid://c38c11wyrh72y" path="res://Levels/Dungeon01/dark_wizard/sprite/boss-hand.png" id="9_sp03e"]
+[ext_resource type="PackedScene" uid="uid://d2cjrayo1co31" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="10_4wfmf"]
 [ext_resource type="PackedScene" uid="uid://cc3g7cj08pt7u" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="10_57pam"]
 [ext_resource type="PackedScene" uid="uid://b2y7tqheqgj4f" path="res://GeneralNodes/HitBox/hit_box.tscn" id="11_lpmky"]
+[ext_resource type="Resource" uid="uid://edngypt4g3a1" path="res://quests/recover_lost_flute.tres" id="11_phkn5"]
 [ext_resource type="AudioStream" uid="uid://c48bjc0gwmts5" path="res://Levels/Dungeon01/dark_wizard/audio/boss_destroy.wav" id="13_lpmky"]
+[ext_resource type="PackedScene" uid="uid://bhj8qimxbtge0" path="res://GeneralNodes/ItemDropper/item_dropper.tscn" id="15_qi64o"]
+[ext_resource type="Resource" uid="uid://bn546bje8wi4x" path="res://Items/magical_flute.tres" id="16_867rx"]
 
 [sub_resource type="Gradient" id="Gradient_qi64o"]
 offsets = PackedFloat32Array(0.5576923, 0.9807692)
@@ -745,7 +749,19 @@ blend_mode = 2
 [node name="DarkWizardBoss" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("7_57pam")
-max_hp = 3
+max_hp = 2
+
+[node name="ItemDropper" parent="DarkWizardBoss" instance=ExtResource("15_qi64o")]
+item_data = ExtResource("16_867rx")
+
+[node name="QuestAdvanceTrigger" parent="DarkWizardBoss/ItemDropper" instance=ExtResource("10_4wfmf")]
+signal_name = "drop_collected"
+linked_quest = ExtResource("11_phkn5")
+quest_step = 2
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Step: 2 - find the magical flute
+Complete: false"
 
 [node name="PersistentDataHandler" parent="DarkWizardBoss" instance=ExtResource("8_57pam")]
 position = Vector2(256, 184)

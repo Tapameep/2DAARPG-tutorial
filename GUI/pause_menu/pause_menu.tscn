@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://8n07yujtif1g"]
+[gd_scene load_steps=13 format=3 uid="uid://8n07yujtif1g"]
 
 [ext_resource type="Script" uid="uid://duhqbqu8keeaj" path="res://GUI/pause_menu/pause_menu.gd" id="1_4w82k"]
 [ext_resource type="Texture2D" uid="uid://dvkr2jqaho26b" path="res://Items/Sprites/items.png" id="2_yiq8o"]
 [ext_resource type="Script" uid="uid://cvwjq75lu5vj2" path="res://GUI/pause_menu/inventory/scripts/inventory_ui.gd" id="3_36pfd"]
 [ext_resource type="PackedScene" uid="uid://g2ge8dedexn4" path="res://GUI/pause_menu/inventory/inventory_slot.tscn" id="3_rsqrg"]
 [ext_resource type="Resource" uid="uid://bobx10i35jk40" path="res://GUI/pause_menu/inventory/player_inventory.tres" id="4_ewgu5"]
+[ext_resource type="Script" uid="uid://b1qsiu8vjbsmi" path="res://GUI/pause_menu/quests_ui.gd" id="6_8rjl7"]
+[ext_resource type="PackedScene" uid="uid://bnsbh0fqxkxya" path="res://GUI/pause_menu/quests/quest_item.tscn" id="6_sn1ji"]
+[ext_resource type="FontFile" uid="uid://cuefjsqp46buy" path="res://GUI/fonts/Abaddon Bold.ttf" id="8_iqcer"]
+[ext_resource type="FontFile" uid="uid://be87hv2lhgvfr" path="res://GUI/fonts/m5x7.ttf" id="9_qikl0"]
+[ext_resource type="PackedScene" uid="uid://c4yr08v80o1yf" path="res://GUI/pause_menu/quests/quest_step_item.tscn" id="10_qikl0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsqrg"]
 atlas = ExtResource("2_yiq8o")
@@ -42,87 +47,184 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133196, 0.133196, 0.133196, 0.827451)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = -48.0
-offset_right = 173.0
-offset_bottom = -17.0
-grow_vertical = 0
-size_flags_horizontal = 0
-
-[node name="Button_Save" type="Button" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
-text = "Save"
-
-[node name="Button_Load" type="Button" parent="Control/HBoxContainer"]
-custom_minimum_size = Vector2(75, 0)
-layout_mode = 2
-text = "Load"
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
+max_polyphony = 4
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -213.0
-offset_top = 24.0
-offset_right = -137.0
-offset_bottom = 47.0
+offset_left = -232.0
+offset_top = 20.0
+offset_right = -156.0
+offset_bottom = 43.0
 grow_horizontal = 2
 size_flags_horizontal = 0
 text = "[ Paused ]"
 
-[node name="ItemDescription" type="Label" parent="Control"]
+[node name="TabContainer" type="TabContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -211.0
-offset_top = 165.0
-offset_right = -22.0
-offset_bottom = 215.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
 grow_horizontal = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 10
-autowrap_mode = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="Control"]
+[node name="Inventory" type="Control" parent="Control/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/Inventory"]
 layout_mode = 0
 offset_left = 23.0
-offset_top = 64.0
+offset_top = 14.0
 offset_right = 219.0
-offset_bottom = 152.0
+offset_bottom = 102.0
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_36pfd")
 
-[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="Control/TabContainer/Inventory/PanelContainer"]
 layout_mode = 2
 columns = 5
 script = ExtResource("3_36pfd")
 data = ExtResource("4_ewgu5")
 
-[node name="InventorySlot" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="InventorySlot2" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot2" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="InventorySlot3" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot3" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="InventorySlot4" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot4" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="InventorySlot5" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot5" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="InventorySlot6" parent="Control/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
+[node name="InventorySlot6" parent="Control/TabContainer/Inventory/PanelContainer/GridContainer" instance=ExtResource("3_rsqrg")]
 layout_mode = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-max_polyphony = 4
+[node name="ItemDescription" type="Label" parent="Control/TabContainer/Inventory"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -211.0
+offset_top = 115.0
+offset_right = -22.0
+offset_bottom = 165.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+
+[node name="Quests" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_8rjl7")
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/TabContainer/Quests"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 234.0
+offset_bottom = 214.0
+follow_focus = true
+scroll_vertical_custom_step = 100.0
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TabContainer/Quests/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="QuestItem" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_sn1ji")]
+layout_mode = 2
+
+[node name="QuestItem2" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_sn1ji")]
+layout_mode = 2
+
+[node name="QuestItem3" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_sn1ji")]
+layout_mode = 2
+
+[node name="QuestItem4" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_sn1ji")]
+layout_mode = 2
+
+[node name="QuestItem5" parent="Control/TabContainer/Quests/ScrollContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_sn1ji")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Quests"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 14.0
+offset_right = 465.0
+offset_bottom = 65.0
+
+[node name="TitleLabel" type="Label" parent="Control/TabContainer/Quests/VBoxContainer"]
+custom_minimum_size = Vector2(215, 10)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_iqcer")
+text = "Quest Title"
+autowrap_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="Control/TabContainer/Quests/VBoxContainer"]
+modulate = Color(0.6354166, 0.6354166, 0.6354166, 1)
+custom_minimum_size = Vector2(215, 10)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_qikl0")
+text = "quest desc...adsfasdf asdfasdfadsfafdadf f dfd a"
+autowrap_mode = 2
+
+[node name="SpacerControl" type="Control" parent="Control/TabContainer/Quests/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="QuestStepItem" parent="Control/TabContainer/Quests/VBoxContainer" instance=ExtResource("10_qikl0")]
+layout_mode = 2
+
+[node name="System" type="Control" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/System"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -35.0
+offset_right = 77.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="Button_Save" type="Button" parent="Control/TabContainer/System/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="Button_Load" type="Button" parent="Control/TabContainer/System/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Load"
+
+[node name="Button_Quit" type="Button" parent="Control/TabContainer/System/VBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Quit"

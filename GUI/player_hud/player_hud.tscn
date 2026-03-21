@@ -1,90 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvdg5txxjgbel"]
+[gd_scene load_steps=21 format=3 uid="uid://bvdg5txxjgbel"]
 
 [ext_resource type="Texture2D" uid="uid://vdttc3hbqk0d" path="res://GUI/player_hud/gui-health.png" id="1_alx7a"]
 [ext_resource type="Script" uid="uid://ci5htarndieqm" path="res://GUI/player_hud/player_hud.gd" id="1_oghrr"]
 [ext_resource type="PackedScene" uid="uid://cgiujhx8cba2h" path="res://GUI/player_hud/heart_gui.tscn" id="2_oghrr"]
 [ext_resource type="FontFile" uid="uid://cuefjsqp46buy" path="res://GUI/fonts/Abaddon Bold.ttf" id="4_4b3j6"]
+[ext_resource type="Texture2D" uid="uid://dlvvrruvempuw" path="res://GUI/player_hud/boss-hp.png" id="5_sysqg"]
+[ext_resource type="FontFile" uid="uid://be87hv2lhgvfr" path="res://GUI/fonts/m5x7.ttf" id="6_rxq5y"]
+[ext_resource type="Texture2D" uid="uid://beseda4xyoxx6" path="res://GUI/player_hud/panel_notification.png" id="7_rxq5y"]
+[ext_resource type="Script" uid="uid://dfeyoj0t113sm" path="res://GUI/player_hud/notifications.gd" id="7_scbx3"]
+[ext_resource type="AudioStream" uid="uid://btoylsa72ormq" path="res://GUI/player_hud/notification.wav" id="8_5bkpt"]
 
 [sub_resource type="FontVariation" id="FontVariation_yhjvm"]
 base_font = ExtResource("4_4b3j6")
 spacing_glyph = 3
-
-[sub_resource type="Animation" id="Animation_sysqg"]
-resource_name = "show_game_over"
-length = 4.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FadeToBlack:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(4),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(188.5, 91)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(4),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(174, 119)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(3, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Label:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(3, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_rxq5y"]
 length = 0.001
@@ -237,11 +165,210 @@ tracks/5/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_sysqg"]
+resource_name = "show_game_over"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(188.5, 91)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(174, 119)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VBoxContainer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Label:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5bkpt"]
 _data = {
 &"RESET": SubResource("Animation_rxq5y"),
 &"fade_to_black": SubResource("Animation_4b3j6"),
 &"show_game_over": SubResource("Animation_sysqg")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bkpt"]
+atlas = ExtResource("5_sysqg")
+region = Rect2(9, 41, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scbx3"]
+atlas = ExtResource("5_sysqg")
+region = Rect2(40, 40, 15, 15)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bkpt"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+texture = ExtResource("7_rxq5y")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Animation" id="Animation_scbx3"]
+resource_name = "show_notification"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.7, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(5, 5), Vector2(5, 5), Vector2(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.7, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_5bkpt")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="Animation" id="Animation_terqw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ea3vn"]
+_data = {
+&"RESET": SubResource("Animation_terqw"),
+&"show_notification": SubResource("Animation_scbx3")
 }
 
 [node name="PlayerHud" type="CanvasLayer"]
@@ -403,6 +530,106 @@ color = Color(0, 0, 0, 0)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/GameOver"]
 libraries = {
 &"": SubResource("AnimationLibrary_5bkpt")
+}
+
+[node name="BossUI" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/BossUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -5.0
+offset_right = 83.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_5bkpt")
+texture_progress = SubResource("AtlasTexture_scbx3")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/BossUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -15.0
+offset_right = 90.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_sysqg")
+region_rect = Rect2(0, 0, 64, 30)
+patch_margin_left = 22
+patch_margin_right = 25
+axis_stretch_horizontal = 1
+
+[node name="Label" type="Label" parent="Control/BossUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.5
+offset_right = 27.5
+offset_bottom = 14.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_rxq5y")
+text = "BOSS NAME"
+horizontal_alignment = 1
+
+[node name="Notification" type="Control" parent="Control"]
+process_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_scbx3")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Notification"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 249.0
+offset_bottom = 53.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5bkpt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+modulate = Color(1, 0.85882354, 0.5529412, 1)
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_rxq5y")
+text = "Notification Type "
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_rxq5y")
+text = "Notification message"
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Notification"]
+libraries = {
+&"": SubResource("AnimationLibrary_ea3vn")
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

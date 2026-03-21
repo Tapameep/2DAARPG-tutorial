@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=3 format=3 uid="uid://dvd2vq0eatw0f"]
+
+[ext_resource type="Script" uid="uid://du5olxl8yp67p" path="res://quests/scripts/quest_reward_item.gd" id="1_2dko0"]
+[ext_resource type="Script" uid="uid://erludh4t1gpo" path="res://quests/scripts/quest_resource.gd" id="2_jayiy"]
+
+[resource]
+script = ExtResource("2_jayiy")
+title = "Short Quest"
+description = "An example short quest, with only one step required to complete it."
+steps = Array[String](["Complete Quest"])
+metadata/_custom_type_script = "uid://erludh4t1gpo"

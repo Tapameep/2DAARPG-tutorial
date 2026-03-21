@@ -43,7 +43,7 @@ func _ready() -> void:
 		return
 	
 	hp = max_hp
-	
+	PlayerHud.show_boss_health( "Dark Wizard" )	
 	hit_box.damaged.connect( damage_taken )
 	
 	for c in $PositionTargets.get_children():
@@ -189,6 +189,7 @@ func damage_taken( _hurt_box : HurtBox ) -> void:
 	damage_count += 1
 	
 	# update boss health bar
+	PlayerHud.update_boss_health( hp, max_hp )
 	
 	animation_player_damage.play( "damaged" )
 	animation_player_damage.seek( 0 )
@@ -206,9 +207,20 @@ func play_audio( _a : AudioStream ) -> void:
 func defeat() -> void:
 	animation_player.play( "destroy" )
 	enable_hit_boxes( false )
-	persistent_data_handler.set_value()
+	PlayerHud.hide_boss_health()
+	#persistent_data_handler.set_value()
 	await animation_player.animation_finished
+	# drop magical flute
+	$ItemDropper.position = boss_node.position
+	$ItemDropper.drop_item()
+	$ItemDropper.drop_collected.connect( open_dungeon )
+	
 	#reopen the room
+	# door_block.enabled = false
+
+
+func open_dungeon() -> void:
+	persistent_data_handler.set_value()
 	door_block.enabled = false
 
 

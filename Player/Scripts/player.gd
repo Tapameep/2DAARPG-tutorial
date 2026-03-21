@@ -50,9 +50,9 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed( "test" ):
-		PlayerManager.shake_camera()
+func _unhandled_input( _event: InputEvent) -> void:
+	#if _event.is_action_pressed( "test" ):
+		#PlayerManager.shake_camera()
 	pass
 
 

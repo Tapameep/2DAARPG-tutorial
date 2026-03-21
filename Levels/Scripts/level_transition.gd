@@ -1,6 +1,7 @@
 @tool # tells godot to also run in the editor
-
 class_name LevelTransition extends Area2D
+
+signal entered_from_here
 
 enum SIDE { LEFT, RIGHT, TOP, BOTTOM }
 
@@ -40,7 +41,6 @@ func _ready() -> void:
 	await LevelManager.level_loaded
 	
 	await get_tree().physics_frame
-
 	
 	monitoring = true
 		
@@ -50,13 +50,15 @@ func _ready() -> void:
 
 func _player_entered( _p : Node2D) -> void:
 	LevelManager.load_new_level( level, target_transition_area, get_offset() )
-	pass
+
 
 func _place_player() -> void:
 	if name != LevelManager.target_transition:
 		return
 	PlayerManager.set_player_position( global_position + LevelManager.position_offset)
-	
+	entered_from_here.emit()
+
+
 func get_offset() -> Vector2:
 	var offset : Vector2 = Vector2.ZERO
 	var player_pos = PlayerManager.player.global_position
