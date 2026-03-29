@@ -7,6 +7,7 @@ signal enemy_destroyed( hurt_box : HurtBox )
 const DIR_4 = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP ]
 
 @export var hp : int = 3
+@export var xp_reward : int = 1
 
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
@@ -62,12 +63,14 @@ func anim_direction() -> String:
 		return "up"
 	else: 
 		return "side"
-		
+
+
 func _take_damage( hurt_box : HurtBox ) -> void:
 	if invulnerable == true:
 		return
 	hp -= hurt_box.damage
 	PlayerManager.shake_camera()
+	EffectManager.damage_text( hurt_box.damage, global_position + Vector2( 0, -36 ) )
 	if hp > 0:
 		enemy_damaged.emit( hurt_box )
 	else:

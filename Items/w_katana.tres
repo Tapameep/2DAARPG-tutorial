@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EquipableItemData" load_steps=8 format=3 uid="uid://djrx2nc8yd1nm"]
+
+[ext_resource type="Script" uid="uid://c2ieldhg7fge3" path="res://Items/item_effects/item_effect.gd" id="1_h70nv"]
+[ext_resource type="Script" uid="uid://dha5o3jjy3riw" path="res://Items/Scripts/equipable_item_modifier.gd" id="2_ik5ys"]
+[ext_resource type="Script" uid="uid://d27wk1c57hec4" path="res://Items/Scripts/equipable_item_data.gd" id="3_ndj5i"]
+[ext_resource type="Texture2D" uid="uid://brr0v7n5im1fl" path="res://Player/Sprites/player_sprite_sword_katana.png" id="4_50xaj"]
+[ext_resource type="Texture2D" uid="uid://mncukoeovi87" path="res://Items/Sprites/gear.png" id="4_xs7v8"]
+
+[sub_resource type="Resource" id="Resource_inskq"]
+script = ExtResource("2_ik5ys")
+type = 1
+value = 2
+metadata/_custom_type_script = "uid://dha5o3jjy3riw"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6e43"]
+atlas = ExtResource("4_xs7v8")
+region = Rect2(64, -1, 32, 32)
+
+[resource]
+script = ExtResource("3_ndj5i")
+modifiers = Array[ExtResource("2_ik5ys")]([SubResource("Resource_inskq")])
+sprite_texture = ExtResource("4_50xaj")
+name = "Katana"
+description = "A blade"
+texture = SubResource("AtlasTexture_b6e43")
+metadata/_custom_type_script = "uid://d27wk1c57hec4"
