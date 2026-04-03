@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://g2ge8dedexn4"]
+[gd_scene load_steps=5 format=3 uid="uid://g2ge8dedexn4"]
 
 [ext_resource type="Script" uid="uid://bs1koxjyg8p1n" path="res://GUI/pause_menu/inventory/scripts/inventory_slot_ui.gd" id="1_d72hl"]
 [ext_resource type="Texture2D" uid="uid://dvkr2jqaho26b" path="res://Items/Sprites/items.png" id="1_eqhwg"]
+[ext_resource type="FontFile" uid="uid://be87hv2lhgvfr" path="res://GUI/fonts/m5x7.ttf" id="3_fvlqd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d72hl"]
 atlas = ExtResource("1_eqhwg")
@@ -26,6 +27,7 @@ offset_right = 31.0
 offset_bottom = 16.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_constants/line_spacing = 3
-theme_override_font_sizes/font_size = 14
+theme_override_fonts/font = ExtResource("3_fvlqd")
+theme_override_font_sizes/font_size = 16
 text = "99"
 horizontal_alignment = 2

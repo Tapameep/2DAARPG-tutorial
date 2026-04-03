@@ -33,7 +33,6 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): # if we are in the editor
 		return
 	
-	
 	monitoring = false # dont load before the player is loaded in
 	
 	_place_player()
@@ -108,7 +107,7 @@ func _update_area() -> void:
 	
 	
 func _snap_to_grid() -> void:
-		position.x = round( position.x / 16 ) * 16
-		position.y = round( position.y / 16 ) * 16
+	position.x = round( position.x / 16 ) * 16
+	position.y = round( position.y / 16 ) * 16
 		
 	

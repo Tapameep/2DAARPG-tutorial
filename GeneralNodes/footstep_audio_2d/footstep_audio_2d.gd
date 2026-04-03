@@ -26,17 +26,17 @@ func get_footstep_type() -> void:
 			
 			var cell : Vector2i = t.local_to_map( t.to_local( global_position ) )
 			
-			print( cell )
+			# print( cell )
 			
 			var data : TileData = t.get_cell_tile_data( cell )
 			
-			print( data )
+			# print( data )
 			
 			if data:
 				var type = data.get_custom_data( "footstep_type" )
 				if type == null:
 					continue
-				print( type )
+				# print( type )
 				stream_randomizer.set_stream( 0, footstep_variants[ type ] )
 			pass
 		pass

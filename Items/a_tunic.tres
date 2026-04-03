@@ -23,4 +23,5 @@ sprite_texture = ExtResource("4_bff3e")
 name = "Tunic and cape"
 description = "A tunic"
 texture = SubResource("AtlasTexture_b6e43")
+cost = 600
 metadata/_custom_type_script = "uid://d27wk1c57hec4"

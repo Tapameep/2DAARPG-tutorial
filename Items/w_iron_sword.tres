@@ -22,4 +22,5 @@ sprite_texture = ExtResource("4_inskq")
 name = "Iron Sword"
 description = "A standard sword made of iron."
 texture = SubResource("AtlasTexture_b6e43")
+cost = 100
 metadata/_custom_type_script = "uid://d27wk1c57hec4"

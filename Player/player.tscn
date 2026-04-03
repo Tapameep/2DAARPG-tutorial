@@ -359,7 +359,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_btcbx"]
 length = 0.001
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1875,4 +1875,3 @@ explosiveness = 0.25
 process_material = SubResource("ParticleProcessMaterial_maysp")
 
 [node name="FootstepAudio2D" parent="." instance=ExtResource("34_j2n6q")]
-position = Vector2(252.26646, 164.70319)

@@ -13,4 +13,5 @@ script = ExtResource("1_mndqm")
 name = "Stone"
 description = "Who doesn't love collecting rocks?"
 texture = SubResource("AtlasTexture_gqhqt")
+cost = 2
 metadata/_custom_type_script = "uid://c8jpjdpl5rfk0"

@@ -21,5 +21,6 @@ script = ExtResource("1_hw0jr")
 name = "Potion"
 description = "This red drink restores your heatlh!"
 texture = SubResource("AtlasTexture_t8xv6")
+cost = 50
 effects = Array[ExtResource("1_t8xv6")]([SubResource("Resource_cvo6j")])
 metadata/_custom_type_script = "uid://c8jpjdpl5rfk0"
