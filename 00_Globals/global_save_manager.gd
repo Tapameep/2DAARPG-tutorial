@@ -16,13 +16,16 @@ var current_save : Dictionary = {
 		attack = 1,
 		defense = 1,
 		pos_x = 0, # Not Vector2, will convert to JSON format
-		pos_y = 0
+		pos_y = 0,
+		arrow_count = 0,
+		bomb_count = 0
 	},
 	items = [],
 	persistence = [],
 	quests = [
 			# { title = "not found", is_complete = false, completed_steps = [''] }
 	],
+	abilities = [ "", "", "", "" ]
 }
 
 func save_game() -> void:
@@ -40,6 +43,7 @@ func save_game() -> void:
 func get_save_file() -> FileAccess:
 	return FileAccess.open( SAVE_PATH + "save.sav", FileAccess.READ )
 
+
 func load_game() -> void:
 	var file := get_save_file()
 	var json := JSON.new()
@@ -56,9 +60,11 @@ func load_game() -> void:
 	
 	var p : Player = PlayerManager.player
 	p.level = current_save.player.level
-	p.xp	 = current_save.player.xp
+	p.xp = current_save.player.xp
 	p.attack = current_save.player.attack
 	p.defense= current_save.player.defense
+	p.arrow_count = current_save.player.arrow_count
+	p.bomb_count = current_save.player.bomb_count
 	
 	
 	PlayerManager.INVENTORY_DATA.parse_save_data( current_save.items )
@@ -69,7 +75,8 @@ func load_game() -> void:
 	game_loaded.emit()
 	
 	pass
-	
+
+
 func update_player_data() -> void:
 	var p : Player = PlayerManager.player
 	current_save.player.hp = p.hp
@@ -80,6 +87,9 @@ func update_player_data() -> void:
 	current_save.player.xp = p.xp
 	current_save.player.attack = p.attack
 	current_save.player.defense = p.defense
+	current_save.player.arrow_count = p.arrow_count
+	current_save.player.bomb_count = p.bomb_count
+	current_save.abilities = p.player_abilities.abilities
 	
 	
 func update_scene_path() -> void:

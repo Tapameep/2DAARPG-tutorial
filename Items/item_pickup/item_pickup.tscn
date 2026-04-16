@@ -1,10 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhlvjc2k5pjc8"]
+[gd_scene load_steps=9 format=3 uid="uid://bhlvjc2k5pjc8"]
 
 [ext_resource type="Script" uid="uid://1vd5enaiks8c" path="res://Items/item_pickup/item_pickup.gd" id="1_pjtoe"]
 [ext_resource type="AudioStream" uid="uid://byy1uwfkytunu" path="res://Items/item_pickup/item_pickup.wav" id="2_c8lbn"]
 [ext_resource type="Texture2D" uid="uid://dchvjtlpugtbg" path="res://Player/Sprites/Shadow.png" id="2_xobfa"]
+[ext_resource type="FontFile" uid="uid://be87hv2lhgvfr" path="res://GUI/fonts/m5x7.ttf" id="4_uwxn1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8lbn"]
+
+[sub_resource type="Animation" id="Animation_k6dju"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_uwxn1"]
 resource_name = "bounce"
@@ -22,21 +38,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -6), Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_k6dju"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gjn8h"]
 _data = {
 &"RESET": SubResource("Animation_k6dju"),
@@ -48,6 +49,7 @@ collision_layer = 0
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_pjtoe")
+item_count = null
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -73,3 +75,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_gjn8h")
 }
 autoplay = "bounce"
+
+[node name="CountLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 24.0
+offset_bottom = 18.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_uwxn1")
+text = "99"
+horizontal_alignment = 1

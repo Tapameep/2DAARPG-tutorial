@@ -5,10 +5,14 @@ class_name State_Lift extends State
 
 @onready var carry: Node = $"../Carry"
 
+var start_anim_late : bool = false
+
 
 # What happens when the player enters this state
 func Enter() -> void: 
 	player.update_animation( "lift" )
+	if start_anim_late == true:
+		player.animation_player.seek( 0.2 )
 	player.animation_player.animation_finished.connect( state_complete )
 	player.audio.stream = lift_audio
 	player.audio.play()
@@ -16,6 +20,7 @@ func Enter() -> void:
 	
 # What happens when the player exits this State
 func Exit() -> void:
+	start_anim_late = false
 	pass
 	
 func  Process(_delta: float ) -> State:

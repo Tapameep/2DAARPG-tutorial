@@ -16,6 +16,8 @@ var attack : int = 1:
 var defense: int = 1 
 var defense_bonus : int = 0
 
+var arrow_count : int = 10 : set = _set_arrow_count
+var bomb_count : int = 10 : set = _set_bomb_count
 
 const DIR_4 = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 
@@ -29,6 +31,7 @@ const DIR_4 = [ Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT, Vector2.UP]
 @onready var lift: State_Lift = $StateMachine/Lift
 @onready var held_item: Node2D = $Sprite2D/HeldItem
 @onready var carry: State_Carry = $StateMachine/Carry
+@onready var player_abilities: PlayerAbilities = $Abilities
 
 
 
@@ -164,3 +167,15 @@ func _on_player_level_up() -> void:
 func _on_equipment_changed() -> void:
 	update_damage_values()
 	defense_bonus = PlayerManager.INVENTORY_DATA.get_defense_bonus()
+
+
+func _set_arrow_count( value : int ) -> void:
+	arrow_count = value
+	PlayerHud.update_arrow_count( value )
+	pass
+
+
+func _set_bomb_count( value : int ) -> void:
+	bomb_count = value
+	PlayerHud.update_bomb_count( value )
+	pass

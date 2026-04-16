@@ -33,5 +33,5 @@ func advance_quest() -> void:
 		_step = ""
 	
 	QuestManager.update_quest( _title, _step, quest_complete )
-	print(  _title, _step, quest_complete  )
+	# print(  _title, _step, quest_complete  )
 	pass

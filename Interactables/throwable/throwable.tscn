@@ -15,3 +15,7 @@ collision_mask = 256
 monitorable = false
 script = ExtResource("2_jakst")
 metadata/_custom_type_script = "uid://chtgk3tvpompo"
+
+[node name="WallDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16

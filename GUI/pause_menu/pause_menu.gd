@@ -44,6 +44,8 @@ func show_pause_menu() -> void:
 	is_paused = true
 	tab_container.current_tab = 0
 	shown.emit()
+	%ArrowCountLabel.text = str( PlayerManager.player.arrow_count )
+	%BombCountLabel.text = str( PlayerManager.player.bomb_count )
 
 
 func hide_pause_menu() -> void:
@@ -97,4 +99,14 @@ func play_audio( audio : AudioStream) -> void:
 
 func preview_stats( item : ItemData ) -> void:
 	preview_stats_changed.emit( item )
+	pass
+
+
+func update_ability_items( items : Array[String] ) -> void:
+	var item_buttons : Array[ Node ] = %AbilityGridContainer.get_children()
+	for i in item_buttons.size():
+		if items[ i ] == "":
+			item_buttons[ i ].visible = false
+		else:
+			item_buttons[ i ].visible = true
 	pass
